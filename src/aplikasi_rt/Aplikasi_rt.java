@@ -5,17 +5,29 @@
  */
 package aplikasi_rt;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author My-PC
  */
 public class Aplikasi_rt {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    Connection con;
+    Statement stm;
+    
+    public void config()throws SQLException{
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con=DriverManager.getConnection("jdbc:mysql://localhost/aplikasi_rt", "root", "");
+            stm = con.createStatement();
+        } catch (ClassNotFoundException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "koneksi gagal "+e.getMessage());
+        }
     }
     
 }
